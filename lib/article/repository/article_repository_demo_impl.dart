@@ -2,9 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_datatable/article/model/article.dart';
-import 'package:flutter_datatable/article/repository/article/article_repository.dart';
 
-class ArticleRepositoryDemoImpl implements ArticleRepository {
+abstract class ArticleRepositoryProtocol {
+  Future<List<Article>> findAll();
+  Future<Article> findById(String id);
+}
+
+class ArticleRepository implements ArticleRepositoryProtocol {
   @override
   Future<List<Article>> findAll() async {
     final jsonString =
